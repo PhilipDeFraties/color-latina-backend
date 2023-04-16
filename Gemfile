@@ -36,6 +36,9 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem "rack-cors"
 
+gem "twilio-ruby"
+gem 'dotenv-rails'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-doc'

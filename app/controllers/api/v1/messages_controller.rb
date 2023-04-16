@@ -1,6 +1,6 @@
 class Api::V1::MessagesController < ApplicationController
   before_action :set_campaign
-  before_action :set_message, only: [:show, :update, :destroy]
+  before_action :set_message, only: [:show, :update, :destroy, :send_to_campaign_volunteers]
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
@@ -35,8 +35,9 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   def send_to_campaign_volunteers
-		# call campaign model method that will send message to each connected CampaignVolunteer
-    head :no_content
+    @campaign.send_message_to_volunteers(@message.id)
+
+    render json: { message: "SMS messages sent successfully to campaign volunteers" }, status: :ok
     rescue StandardError => e
     	render json: { error: e.message }, status: :internal_server_error
 	end
@@ -49,7 +50,7 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   def set_message
-    @message = @campaign.messages.find_by(id: params[:id])
+    @message = @campaign.messages.find_by(id: params[:message_id])
     render json: { error: "Message not found" }, status: :not_found unless @message
   end
 

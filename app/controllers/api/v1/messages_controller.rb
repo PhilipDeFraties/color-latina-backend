@@ -1,4 +1,4 @@
-class Api::V1::Campaigns::MessagesController < ApplicationController
+class Api::V1::MessagesController < ApplicationController
   before_action :set_campaign
   before_action :set_message, only: [:show, :update, :destroy]
 
@@ -36,7 +36,6 @@ class Api::V1::Campaigns::MessagesController < ApplicationController
 
   def send_to_campaign_volunteers
 		# call campaign model method that will send message to each connected CampaignVolunteer
-	
     head :no_content
     rescue StandardError => e
     	render json: { error: e.message }, status: :internal_server_error

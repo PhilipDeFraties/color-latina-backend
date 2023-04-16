@@ -4,8 +4,7 @@ Rails.application.routes.draw do
       resources :volunteers
       resources :campaigns do
         resources :messages do
-          # post :send_to_campaign_volunteers, on: :collection
-          match 'send_to_campaign_volunteers', via: %i[post], as: :send_to_campaign_volunteers, on: :collection
+          post :send_to_campaign_volunteers, on: :collection
         end
       end
     end

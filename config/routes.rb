@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       resources :volunteers
       resources :campaigns do
         resources :messages do
-          post :send_to_campaign_volunteers, on: :collection
+          post 'send_to_campaign_volunteers', to: 'messages#send_to_campaign_volunteers', on: :member
         end
       end
     end

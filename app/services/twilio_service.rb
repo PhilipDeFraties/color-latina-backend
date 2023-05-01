@@ -1,5 +1,5 @@
 class TwilioService
-  def send_sms(to, body)
+  def self.send_sms(to, body)
     account_sid = ENV['TWILIO_ACCOUNT_SID']
     auth_token = ENV['TWILIO_AUTH_TOKEN']
     twilio_number = ENV['TWILIO_PHONE_NUMBER']

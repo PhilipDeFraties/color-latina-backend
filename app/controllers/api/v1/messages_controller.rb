@@ -50,7 +50,7 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   def set_message
-    @message = @campaign.messages.find_by(id: params[:message_id])
+    @message = @campaign.messages.find_by(id: params[:id])
     render json: { error: "Message not found" }, status: :not_found unless @message
   end
 
